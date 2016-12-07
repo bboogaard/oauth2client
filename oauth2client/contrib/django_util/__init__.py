@@ -231,6 +231,7 @@ import importlib
 import django.conf
 from django.core import exceptions
 from django.core import urlresolvers
+from django.utils.functional import SimpleLazyObject
 from six.moves.urllib import parse
 
 from oauth2client import clientsecrets
@@ -362,7 +363,7 @@ class OAuth2Settings(object):
          self.storage_model_credentials_property) = _get_storage_model()
 
 
-oauth2_settings = OAuth2Settings(django.conf.settings)
+oauth2_settings = SimpleLazyObject(OAuth2Settings(django.conf.settings))
 
 _CREDENTIALS_KEY = 'google_oauth2_credentials'
 
